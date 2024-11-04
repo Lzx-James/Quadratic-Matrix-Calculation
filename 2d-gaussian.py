@@ -1,8 +1,5 @@
-# Importing the necessary modules
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.patches import Ellipse
-from scipy.linalg import sqrtm
 from scipy.stats import multivariate_normal
 
 plt.rcParams['figure.figsize'] = 8, 8
@@ -28,20 +25,19 @@ random_seed = 10
 
 generate_and_plot(Kx, mu)
 
-a = np.sqrt(1)  # Principle axes
-b = np.sqrt(3)
-theta = np.radians(-45)
+# Get inverse matrix of Kxx
+Kx_inv = np.linalg.inv(Kx)
 
-# 生成椭圆的点
-t = np.linspace(0, 2 * np.pi, 100)
-x = a * np.cos(t)
-y = b * np.sin(t)
+# Generate circle theta
+theta = np.linspace(0, 2 * np.pi, 100)
 
-# 旋转椭圆
-x_rotated = x * np.cos(theta) - y * np.sin(theta) + mu[0]
-y_rotated = x * np.sin(theta) + y * np.cos(theta) + mu[1]
+# Generate circle by theta
+circle_points = np.array([np.cos(theta), np.sin(theta)])
 
-# 绘制
-plt.plot(x_rotated, y_rotated, label='斜椭圆', color='red')
+# Generating points of an ellipse by a quadratic matrix transformation
+ellipse_points = np.linalg.cholesky(Kx_inv).dot(circle_points)
+
+# Plot ellipse
+plt.plot(ellipse_points[0, :] + mu[0], ellipse_points[1, :] + mu[1], color='red')
 
 plt.show()
