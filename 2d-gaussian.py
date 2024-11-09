@@ -18,9 +18,21 @@ def generate_and_plot(kx, mu):
 
 
 # Define the mean and covariance matrix
-Kx = np.array([[2.0, 1.0],
+Kx1 = np.array([[2.0, 0.0],
+               [0.0, 4.0]])
+mu1 = np.array([0, 0])
+
+Kx2 = np.array([[2.0, 1.0],
                [1.0, 2.0]])
-mu = np.array([1, 2])
+mu2 = np.array([0, 0])
+
+Kx3 = np.array([[2.0, 1.0],
+               [1.0, 2.0]])
+mu3 = np.array([1, 2])
+
+Kx = Kx3
+mu = mu3
+
 random_seed = 10
 
 generate_and_plot(Kx, mu)
