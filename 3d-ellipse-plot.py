@@ -14,7 +14,7 @@ A2 = np.array([[5, 0, -np.sqrt(2)],
                ])
 
 u = np.linspace(0, 2 * np.pi, 100)
-v = np.linspace(0, np.pi, 100)
+v = np.linspace(0, 2 * np.pi, 100)
 
 # Generate sphere points
 x_sphere = np.outer(np.cos(u), np.sin(v))
@@ -30,7 +30,6 @@ for i in range(x_sphere.shape[0]):
     for j in range(x_sphere.shape[1]):
         point = np.array([x_sphere[i, j], y_sphere[i, j], z_sphere[i, j]])
         ellipse_points[:, i * x_sphere.shape[1] + j] = L.dot(point)
-
 
 # Plot ellipse sphere
 fig = plt.figure(figsize=(10, 8))
